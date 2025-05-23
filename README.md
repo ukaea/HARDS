@@ -3,20 +3,26 @@ An API and corresponding simple filesystem implementation for managing hierarchi
 
 
 ## Installation
-HARDS can be installed from source by running:
+HARDS can be installed using `pip` by running:
+```shell
+pip install hards
+```
+
+Developers may wish to install HARDS from source:
 ```shell
 git clone https://github.com/ukaea/HARDS.git
-cd Hierarchical-Arbitrary-Data-Storage
+cd HARDS
 pip install .
 ```
 
-This makes the `hards` package (and its modules) available for importing.
+This makes the `hards` package (and its modules) available for importing into other Python libraries/scripts.
 
 ## Examples
-Examples of using `hards` can be found in the `examples` directory. To run the notebooks, ensure the dependencies are installed in your environment by running:
+Examples of using `hards` can be found in the `examples` directory. To run the notebooks, install HARDS from source and ensure the `examples` dependencies are installed in your Python environment by running:
 ```shell
 pip install .'[examples]'
 ```
+in the root project directory.
 
 ## Development
 Development dependencies can be installed by running the following inside of the root project directory:
