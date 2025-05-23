@@ -30,6 +30,10 @@ dev = [
     "hards[examples]",
 ]
 
+[project.urls]
+Documentation = "https://ukaea.github.io/HARDS/"
+Source = "https://github.com/ukaea/HARDS"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
