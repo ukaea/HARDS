@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "hards"
+version = "1.0.0"
+description = "Extensible interface for managing hierarchical arbitrary data storage."
+authors = [{ name = "Timothy Nunn", email = "timothy.nunn@ukaea.uk" }]
+requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["hierarchical data", "filesystem", "data"]
+
+[project.optional-dependencies]
+examples = [
+    "plotly>=5.0",
+    "scipy>=1.10",
+    "pandas",
+    "nbformat>=4.2",
+    "ipython",
+    "ipykernel",
+]
+dev = [
+    "ruff==0.11.2",
+    "pre-commit",
+    "pytest",
+    "testbook>=0.4",
+    "Sphinx>=8.0",
+    "nbsphinx>=0.9",
+    "hards[examples]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+extend-exclude = ["docs/"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "D213", "COM812"]
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = ["T201", "S311"]
+"tests/*" = ["INP001", "ANN", "D103", "S101", "SLF001", "PLR0915", "PLR2004"]
+
+[tool.ruff.format]
+preview = true

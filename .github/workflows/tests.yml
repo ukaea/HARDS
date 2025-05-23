@@ -1,0 +1,26 @@
+name: HARDS test workflow
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  test_hards:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v4
+      - name: Install pytest
+        run: pip install pytest
+      - name: Install HARDS (dev)
+        run: pip install '.[dev]'
+      - name: Run pytest
+        run: pytest

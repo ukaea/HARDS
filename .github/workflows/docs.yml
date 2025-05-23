@@ -1,0 +1,44 @@
+name: HARDS documentation deployment workflow
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/checkout@v4
+      - name: Install HARDS with development dependencies
+        run: pip install '.[dev]'
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+      - name: Build Sphinx documentation
+        run: |
+          cd docs/
+          make html
+          cd ..
+      - name: Setup pages
+        uses: actions/configure-pages@v5
+      - name: Upload static HTML
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "docs/build/html/"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

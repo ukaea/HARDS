@@ -1,0 +1,20 @@
+name: HARDS quality assurance workflow
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  quality_assure_hards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/checkout@v4
+      - name: Install HARDS (and pre-commit)
+        run: pip install '.[dev]'
+      - name: Run pre-commit
+        run: pre-commit run --all-files
