@@ -1,4 +1,8 @@
 # Hierarchical ARbitrary Data Storage: HARDS
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Testing Workflow](https://github.com/ukaea/HARDS/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ukaea/HARDS/actions/workflows/tests.yml)
+
+
 An API and corresponding simple filesystem implementation for managing hierarchical datasets in Python.
 
 
