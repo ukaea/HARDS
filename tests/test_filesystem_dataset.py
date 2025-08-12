@@ -64,6 +64,20 @@ def test_dataset_files(filesystem_dataset, data_assets):
         assert f.read() == "file data!\n"
 
 
+def test_dataset_files_overwrite(filesystem_dataset, data_assets):
+    filesystem_dataset.add_file(data_assets / "example_file.dat")
+    filesystem_dataset.add_file(data_assets / "example_file.dat")
+    assert filesystem_dataset.has_file("example_file.dat")
+
+
+def test_dataset_files_permissions(filesystem_dataset, data_assets):
+    filesystem_dataset.add_file(data_assets / "example_file.dat", permissions=0o400)
+    assert filesystem_dataset.has_file("example_file.dat")
+
+    with pytest.raises(PermissionError):
+        filesystem_dataset.add_file(data_assets / "example_file.dat")
+
+
 def test_dataset_same_from_scratch(filesystem_dataset):
     filesystem_dataset.add_data({"test_data_1": 2e4, "test_data_2": 1.4})
 
