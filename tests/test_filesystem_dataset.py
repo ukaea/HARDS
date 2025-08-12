@@ -78,6 +78,14 @@ def test_dataset_files_permissions(filesystem_dataset, data_assets):
         filesystem_dataset.add_file(data_assets / "example_file.dat")
 
 
+def test_dataset_files_rename(filesystem_dataset, data_assets):
+    filesystem_dataset.add_file(
+        data_assets / "example_file.dat", name="example_file.new_name.dat"
+    )
+    assert filesystem_dataset.has_file("example_file.new_name.dat")
+    assert not filesystem_dataset.has_file("example_file.dat")
+
+
 def test_dataset_same_from_scratch(filesystem_dataset):
     filesystem_dataset.add_data({"test_data_1": 2e4, "test_data_2": 1.4})
 
