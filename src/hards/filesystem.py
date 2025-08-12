@@ -195,7 +195,9 @@ class _FilesystemHasFilesMixin:
 
         return location
 
-    def add_file(self, file: Path, *, name: str | None = None) -> None:
+    def add_file(
+        self, file: Path, *, name: str | None = None, permissions: int | None = None
+    ) -> None:
         super().add_file(file, name=name)
         if not file.exists() or not file.is_file:
             error_msg = (
@@ -208,7 +210,8 @@ class _FilesystemHasFilesMixin:
         destination = self._files_location / new_name
 
         shutil.copy2(file, destination, follow_symlinks=True)
-        Path(destination).chmod(0o400)
+        if permissions is not None:
+            Path(destination).chmod(0o400)
         self._files.append(new_name)
 
 
