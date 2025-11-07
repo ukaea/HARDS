@@ -70,12 +70,15 @@ def test_dataset_files_overwrite(filesystem_dataset, data_assets):
     assert filesystem_dataset.has_file("example_file.dat")
 
 
-def test_dataset_files_permissions(filesystem_dataset, data_assets):
-    filesystem_dataset.add_file(data_assets / "example_file.dat", permissions=0o400)
+def test_dataset_files_read_only(filesystem_dataset, data_assets):
+    filesystem_dataset.add_file(data_assets / "example_file.dat")
     assert filesystem_dataset.has_file("example_file.dat")
 
-    with pytest.raises(PermissionError):
-        filesystem_dataset.add_file(data_assets / "example_file.dat")
+    with (
+        pytest.raises(PermissionError),
+        filesystem_dataset.get_file("example_file.dat").open("w") as f,
+    ):
+        f.write("test")
 
 
 def test_dataset_files_rename(filesystem_dataset, data_assets):
