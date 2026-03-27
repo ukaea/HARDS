@@ -1,10 +1,12 @@
 name: HARDS quality assurance workflow
+permissions:
+  contents: read
 on:
   pull_request:
   push:
-
-permissions:
-  contents: read
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   quality_assure_hards:

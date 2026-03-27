@@ -1,10 +1,12 @@
 name: HARDS test workflow
+permissions:
+  contents: read
 on:
   pull_request:
   push:
-
-permissions:
-  contents: read
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   test_hards:
